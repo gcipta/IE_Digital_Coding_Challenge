@@ -1,0 +1,12 @@
+
+public class Pacman {
+	
+	private int xCoord;
+	private int yCoord;
+	private String faceDirection;
+	
+	public Pacman(int xCoord, int yCoord, String faceDirection) {
+		
+	}
+
+}

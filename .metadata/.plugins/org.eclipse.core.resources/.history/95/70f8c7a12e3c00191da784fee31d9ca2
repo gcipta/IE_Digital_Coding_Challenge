@@ -1,0 +1,37 @@
+
+public class Command implements Movement{
+	
+	public static final String PLACE_COMMAND		=	"PLACE";
+	public static final String MOVE_COMMAND		=	"MOVE";
+	public static final String RIGHT_COMMAND		=	"RIGHT";
+	public static final String LEFT_COMMAND		=	"LEFT";
+	public static final String REPORT_COMMAND	=	"REPORT";
+	
+	
+	public Pacman place(String xCoord, String yCoord, String faceDirection) {
+		
+		Pacman thePacman = new Pacman(xCoord, yCoord, faceDirection);
+		
+		return thePacman;
+	}
+	
+	public voic
+	
+	
+	
+
+/*LEFT AND RIGHT COMMAND */
+//		 List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
+//		 
+//		 int leftTurn = faceList.size() - 1;
+//		 int rightTurn = 1;
+//		 
+//		 Scanner myObj = new Scanner(System.in);
+//		 System.out.println("Enter Face");
+//		 String name = myObj.nextLine();
+//		 
+//		 int face_indx = (leftTurn+ faceList.indexOf(name))% faceList.size();
+//		 
+//		 System.out.println(faceList.get(face_indx));
+
+}

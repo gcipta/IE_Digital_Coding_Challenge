@@ -1,0 +1,89 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+
+
+public class Main {
+	
+	public static void main (String args[]) throws IOException {
+		
+		System.out.println("WELCOME TO PACMAN SIMULATOR");
+		
+		@SuppressWarnings("unused")
+		Pacman thePacman = null;
+		Detector gameDetector = new Detector();
+		Command gameCommand = new Command();
+		
+		boolean gameStart = false;
+		
+		
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader("test_a.txt"));
+			String line = reader.readLine();
+			while (line != null) {
+				System.out.println(line);
+				// read next line
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
+	
+//		
+//		
+//		/* READING USER INPUT */
+//		@SuppressWarnings("resource")
+//		Scanner input = new Scanner(System.in);
+//		
+//		while (input.hasNext()) {
+//			String[] currLine = input.nextLine().split(" ");
+//			
+//			
+//			if(currLine[0].equals(gameCommand.PLACE_COMMAND)) {
+//				
+//				String[] placement = currLine[1].split(",");
+//				
+//				if(!gameDetector.isOffGrid(placement[0], placement[1])) {
+//					thePacman = gameCommand.place(Integer.parseInt(placement[0]), 
+//							Integer.parseInt(placement[1]), 
+//							placement[2]);
+//					
+//					gameStart = true;
+//				}
+//			}
+//			
+//			// Move the pacman according to its face direction
+//			if(currLine[0].equals(gameCommand.MOVE_COMMAND) && gameStart) {
+//				thePacman = gameCommand.move(thePacman);
+//			}
+//			
+//			// 
+//			if(currLine[0].equals(gameCommand.LEFT_COMMAND) && gameStart) {
+//				thePacman = gameCommand.turnLeft(thePacman);
+//			}
+//			
+//			if(currLine[0].equals(gameCommand.RIGHT_COMMAND) && gameStart) {
+//				thePacman = gameCommand.turnRight(thePacman);
+//			}
+//			
+//			if(currLine[0].equals(gameCommand.REPORT_COMMAND) && gameStart) {
+//				System.out.printf("%d,%d,%s", thePacman.getxCoord(), 
+//						thePacman.getyCoord(),
+//						thePacman.getFaceDirection());
+//				break;
+//			}
+//			
+//			
+//		}
+//	}
+}

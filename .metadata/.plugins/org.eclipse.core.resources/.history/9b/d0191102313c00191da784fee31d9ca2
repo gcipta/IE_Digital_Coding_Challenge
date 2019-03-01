@@ -1,0 +1,104 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+
+
+public class Main {
+	
+	public static void main (String args[]) {
+		
+		Detector gameDetector = new Detector();
+		Command gameCommand = new Command();
+		
+		@SuppressWarnings("unused")
+		Pacman thePacman;
+	
+		boolean gameStart = false;
+		
+		
+		/* READING USER INPUT */
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		
+		while (input.hasNext()) {
+			String[] currLine = input.nextLine().split(" ");
+			
+			
+			if(currLine[0].equals(gameCommand.PLACE_COMMAND)) {
+				
+				String[] placement = currLine[1].split(",");
+				
+				if(!gameDetector.isOffGrid(placement[0], placement[1])) {
+					thePacman = gameCommand.place(placement[0], placement[1], placement[2]);
+				}
+			}
+			
+			if(currLine[0].equals(gameCommand.MOVE_COMMAND) && gameStart) {
+				thePacman = gameCommand.move(thePacman);
+			}
+			
+			if(currLine[0].equals(gameCommand.LEFT_COMMAND) && gameStart) {
+				
+			}
+			
+			if(currLine[0].equals(gameCommand.RIGHT_COMMAND) && gameStart) {
+				
+			}
+			
+			if(currLine[0].equals(gameCommand.REPORT_COMMAND) && gameStart) {
+				
+			}
+			
+			
+		}
+	}
+}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+///*READING USER INPUT*/
+//		Scanner input = new Scanner(System.in);
+//		while (input.hasNext()) {
+//			String[] currLine = input.nextLine().split(" ");
+//			
+//			// Place Command
+//			if(currLine[0].equals(PLACE_COMMAND)) {
+//				String[] placement = currLine[1].split(",");
+//				int xCoord = Integer.parseInt(placement[0]);
+//				int yCoord = Integer.parseInt(placement[1]);
+//				String faceDirection = placement[2];
+//				
+//				System.out.println(faceDirection);
+//			}
+//			
+//			// Move Command
+//			else if(currLine[0].equals(MOVE_COMMAND)) {
+//				
+//				
+//			
+//			}
+//		}
+//	}
+

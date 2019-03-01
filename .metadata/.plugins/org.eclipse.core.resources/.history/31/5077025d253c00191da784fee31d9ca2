@@ -1,0 +1,21 @@
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+	
+	public static void main (String args[]) {
+		
+		 List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
+		 
+		 int leftTurn = faceList.size() - 1;
+		 int rightTurn = 1;
+		 
+		 
+		 Scanner scan = new Scanner(System.in);
+		 String s = scan.next();
+		 int i = scan.nextInt();
+		 
+		
+	}
+
+}

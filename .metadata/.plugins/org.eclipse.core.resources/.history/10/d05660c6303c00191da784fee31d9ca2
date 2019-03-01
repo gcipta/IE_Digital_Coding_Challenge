@@ -1,0 +1,80 @@
+
+public class Command implements Movement{
+		
+	// Various type of commands available
+	public static final String PLACE_COMMAND		=	"PLACE";
+	public static final String MOVE_COMMAND		=	"MOVE";
+	public static final String RIGHT_COMMAND		=	"RIGHT";
+	public static final String LEFT_COMMAND		=	"LEFT";
+	public static final String REPORT_COMMAND	=	"REPORT";
+
+	// The Face Direction
+	public static final String NORTH_DIRECTION	=	"NORTH";
+	public static final String EAST_DIRECTION	=	"EAST";
+	public static final String SOUTH_DIRECTION	=	"SOUTH";
+	public static final String WEST_DIRECTION	=	"WEST";
+	
+	public static final int MOVEMENT_STEP		= 	1;
+	
+	Detector gameDetector = new Detector();
+	
+	/**
+	 * This function is to initialize new Pacman based on the place command
+	 */
+	public Pacman place(int xCoord, int yCoord, String faceDirection) {
+		Pacman thePacman = new Pacman(xCoord, yCoord, faceDirection);
+		return thePacman;
+	}
+	
+	public Pacman move(Pacman thePacman) {
+		
+		// Movement to North Direction (Only yCoord Change)
+		if(thePacman.getFaceDirection().equals(NORTH_DIRECTION)){
+			thePacman.setyCoord(thePacman.getyCoord() + MOVEMENT_STEP);
+		}
+		
+		// Movement to East Direction (Only xCoord Change)
+		else if(thePacman.getFaceDirection().equals(EAST_DIRECTION)){
+			int nextxGrid = thePacman.getxCoord() + MOVEMENT_STEP;
+			if(!gameDetector.isOffGrid(nextxGrid, thePacman.getyCoord())) {
+				thePacman.setxCoord(nextxGrid);
+			}
+		}
+		
+		// Movement to South Direction (Only yCoord Change)
+		else if(thePacman.getFaceDirection().equals(SOUTH_DIRECTION)){
+			thePacman.setyCoord(thePacman.getyCoord() - MOVEMENT_STEP);
+		}
+
+		// Movement to West Direction (Only xCoord Change)
+		else if(thePacman.getFaceDirection().equals(WEST_DIRECTION)){
+			int nextxGrid = thePacman.getxCoord() - MOVEMENT_STEP;
+			if(!gameDetector.isOffGrid(nextxGrid, thePacman.getyCoord())) {
+				thePacman.setxCoord(nextxGrid);
+			}
+		}
+		
+		return thePacman;
+		
+	}
+
+	
+	
+	
+	
+
+/*LEFT AND RIGHT COMMAND */
+//		 List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
+//		 
+//		 int leftTurn = faceList.size() - 1;
+//		 int rightTurn = 1;
+//		 
+//		 Scanner myObj = new Scanner(System.in);
+//		 System.out.println("Enter Face");
+//		 String name = myObj.nextLine();
+//		 
+//		 int face_indx = (leftTurn+ faceList.indexOf(name))% faceList.size();
+//		 
+//		 System.out.println(faceList.get(face_indx));
+
+}

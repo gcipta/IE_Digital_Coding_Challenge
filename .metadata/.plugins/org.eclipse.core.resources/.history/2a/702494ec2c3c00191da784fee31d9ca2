@@ -1,0 +1,22 @@
+
+public class Detector {
+	
+	public static final int THRESHOLD_SIZE = 0;
+	public static final int GRID_X_SIZE = 4;
+	public static final int GRID_Y_SIZE = 4;
+	
+	public boolean detectOffGrid(String xCoord, String yCoord) {
+		
+		Integer.parseInt(xCoord);
+		
+		if ((THRESHOLD_SIZE < xCoord) || 
+				(xCoord < GRID_X_SIZE) ||
+				(THRESHOLD_SIZE < yCoord) || 
+				(yCoord < GRID_Y_SIZE)
+				) {
+			return true;
+		}
+		return false;
+	}
+
+}

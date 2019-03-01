@@ -1,0 +1,8 @@
+
+public interface Movement {
+	
+	public void place(int xCoord, int yCoord) {
+		
+	}
+
+}

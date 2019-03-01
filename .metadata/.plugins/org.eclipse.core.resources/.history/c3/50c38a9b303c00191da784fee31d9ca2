@@ -1,0 +1,41 @@
+
+public class Pacman {
+	
+	private int xCoord;
+	private int yCoord;
+	private String faceDirection;
+	
+	public Pacman(int xCoord2, int yCoord2, String faceDirection) {
+		
+		this.setxCoord(Integer.parseInt(xCoord2));
+		this.setyCoord(Integer.parseInt(yCoord2));
+		this.setFaceDirection(faceDirection);
+	}
+
+	public String getFaceDirection() {
+		return faceDirection;
+	}
+
+	public void setFaceDirection(String faceDirection) {
+		this.faceDirection = faceDirection;
+	}
+
+	public int getxCoord() {
+		return xCoord;
+	}
+
+	public void setxCoord(int xCoord) {
+		this.xCoord = xCoord;
+	}
+
+	public int getyCoord() {
+		return yCoord;
+	}
+
+	public void setyCoord(int yCoord) {
+		this.yCoord = yCoord;
+	}
+	
+	
+
+}

@@ -1,0 +1,6 @@
+
+public interface Movement {
+	
+	public void place(String xCoord, String yCoord, String faceDirection);
+	
+}

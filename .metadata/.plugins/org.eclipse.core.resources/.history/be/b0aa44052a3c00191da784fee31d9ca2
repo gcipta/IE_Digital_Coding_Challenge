@@ -1,0 +1,8 @@
+
+public class Pacman {
+	
+	private int xCoord;
+	private int yCoord;
+	private String faceDirection;
+
+}

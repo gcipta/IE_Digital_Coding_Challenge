@@ -1,0 +1,13 @@
+
+public class GamePlay {
+	
+	@SuppressWarnings("unused")
+	Pacman thePacman = null;
+	Detector gameDetector = new Detector();
+	Command gameCommand = new Command();
+	
+	boolean gameStart = false;
+	
+	public Pacman fileGamePlay()
+
+}

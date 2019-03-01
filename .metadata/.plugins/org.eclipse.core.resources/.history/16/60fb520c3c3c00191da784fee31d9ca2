@@ -1,0 +1,115 @@
+import java.util.Arrays;
+import java.util.List;
+
+public class Command implements Movement{
+		
+	// Various type of commands available
+	public final String PLACE_COMMAND	=	"PLACE";
+	public final String MOVE_COMMAND		=	"MOVE";
+	public final String RIGHT_COMMAND	=	"RIGHT";
+	public final String LEFT_COMMAND		=	"LEFT";
+	public final String REPORT_COMMAND	=	"REPORT";
+
+	// The Face Direction
+	public static final String NORTH_DIRECTION	=	"NORTH";
+	public static final String EAST_DIRECTION	=	"EAST";
+	public static final String SOUTH_DIRECTION	=	"SOUTH";
+	public static final String WEST_DIRECTION	=	"WEST";
+	
+	public static final int MOVEMENT_STEP		= 	1;
+	
+	Detector gameDetector = new Detector();
+	List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
+	
+	/**
+	 * This function is to initialize new Pacman based on the place command
+	 */
+	public Pacman place(int xCoord, int yCoord, String faceDirection) {
+		Pacman thePacman = new Pacman(xCoord, yCoord, faceDirection);
+		return thePacman;
+	}
+	
+	public Pacman move(Pacman thePacman) {
+		
+		// Movement to North Direction (Only yCoord Change)
+		if(thePacman.getFaceDirection().equals(NORTH_DIRECTION)){
+			int nextyGrid = thePacman.getyCoord() + MOVEMENT_STEP;
+			if(!gameDetector.isOffGrid(thePacman.getxCoord(), nextyGrid)) {
+				thePacman.setyCoord(nextyGrid);
+			}
+			else {
+				System.out.println("ERROR! Out of Grid");
+			}
+		}
+		
+		// Movement to East Direction (Only xCoord Change)
+		else if(thePacman.getFaceDirection().equals(EAST_DIRECTION)){
+			int nextxGrid = thePacman.getxCoord() + MOVEMENT_STEP;
+			if(!gameDetector.isOffGrid(nextxGrid, thePacman.getyCoord())) {
+				thePacman.setxCoord(nextxGrid);
+			}
+			else {
+				System.out.println("ERROR! Out of Grid");
+			}
+		}
+		
+		// Movement to South Direction (Only yCoord Change)
+		else if(thePacman.getFaceDirection().equals(SOUTH_DIRECTION)){
+			int nextyGrid = thePacman.getyCoord() - MOVEMENT_STEP;
+			if(!gameDetector.isOffGrid(thePacman.getxCoord(), nextyGrid)) {
+				thePacman.setyCoord(nextyGrid);
+			}
+			else {
+				System.out.println("ERROR! Out of Grid");
+			}
+		}
+
+		// Movement to West Direction (Only xCoord Change)
+		else if(thePacman.getFaceDirection().equals(WEST_DIRECTION)){
+			int nextxGrid = thePacman.getxCoord() - MOVEMENT_STEP;
+			
+			if(!gameDetector.isOffGrid(nextxGrid, thePacman.getyCoord())) {
+				thePacman.setxCoord(nextxGrid);
+			}
+			else {
+				System.out.println("ERROR! Out of Grid");
+			}
+		}
+		
+		return thePacman;
+	}
+
+	public Pacman turnLeft(Pacman thePacman) {
+		int currFaceIndx 	= faceList.indexOf(thePacman.getFaceDirection());
+		int leftAdjustment	= faceList.size() - MOVEMENT_STEP;
+		int newFaceindx		= ((leftAdjustment + currFaceIndx) % faceList.size());
+		
+		// Setting to the new face direction
+		thePacman.setFaceDirection(faceList.get(newFaceindx));
+		return thePacman;
+	}
+
+	public Pacman turnRight(Pacman thePacman) {
+		int currFaceIndx 	= faceList.indexOf(thePacman.getFaceDirection());
+		int rightAdjustment	= MOVEMENT_STEP;
+		int newFaceindx 		= ((rightAdjustment + currFaceIndx) % faceList.size());
+		
+		// Setting to the new face direction
+		thePacman.setFaceDirection(faceList.get(newFaceindx));
+		return thePacman;
+	}
+
+	@Override
+	public Pacman place(String xCoord, String yCoord, String faceDirection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void getReport(Pacman thePacman) {
+		System.out.printf("%d,%d,%s", thePacman.getxCoord(), 
+				thePacman.getyCoord(),
+				thePacman.getFaceDirection());		
+	}
+
+	
+}

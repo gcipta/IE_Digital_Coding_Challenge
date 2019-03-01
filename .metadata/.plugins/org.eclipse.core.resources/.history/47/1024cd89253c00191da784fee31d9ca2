@@ -1,0 +1,23 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main (String args[]) {
+		
+		 List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
+		 
+		 int leftTurn = faceList.size() - 1;
+		 int rightTurn = 1;
+		 
+		 Scanner myObj = new Scanner(System.in);
+		 System.out.println("Enter Face");
+		 String name = myObj.nextLine();
+		 
+		 int face_indx = rightTurn + faceList.indexOf(name);
+
+		
+	}
+
+}

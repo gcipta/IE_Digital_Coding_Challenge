@@ -1,0 +1,58 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+
+
+public class Main {
+	
+	public static final String PLACE_COMMAND	=	"PLACE";
+	public static final String MOVE_COMMAND	=	"MOVE";
+	public static final String RIGHT_COMMAND	=	"RIGHT";
+	public static final String LEFT_COMMAND	=	"LEFT";
+	
+	
+	public static void main (String args[]) {
+		
+/*LEFT AND RIGHT COMMAND */
+//		 List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
+//		 
+//		 int leftTurn = faceList.size() - 1;
+//		 int rightTurn = 1;
+//		 
+//		 Scanner myObj = new Scanner(System.in);
+//		 System.out.println("Enter Face");
+//		 String name = myObj.nextLine();
+//		 
+//		 int face_indx = (leftTurn+ faceList.indexOf(name))% faceList.size();
+//		 
+//		 System.out.println(faceList.get(face_indx));
+		
+		
+/*READING USER INPUT*/
+		Scanner input = new Scanner(System.in);
+		while (input.hasNext()) {
+			String[] currLine = input.nextLine().split(" ");
+			
+			// Place Command
+			if(currLine[0].equals(PLACE_COMMAND)) {
+				String[] placement = currLine[1].split(",");
+				int xCoord = placement[0];
+				int yCoord = placement[1];
+				
+			}
+			
+			// Move Command
+			else if()
+			
+			System.out.println(currLine.length);
+			
+		}
+				
+		
+		 
+		
+
+	}
+
+}

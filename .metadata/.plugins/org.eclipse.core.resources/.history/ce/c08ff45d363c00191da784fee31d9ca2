@@ -1,0 +1,10 @@
+
+public class FileGamePlay {
+
+	public static void play(String fileName) {
+		
+		// Read the File
+		
+	}
+
+}

@@ -1,0 +1,39 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main (String args[]) {
+		
+/*LEFT AND RIGHT COMMAND */
+//		 List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
+//		 
+//		 int leftTurn = faceList.size() - 1;
+//		 int rightTurn = 1;
+//		 
+//		 Scanner myObj = new Scanner(System.in);
+//		 System.out.println("Enter Face");
+//		 String name = myObj.nextLine();
+//		 
+//		 int face_indx = (leftTurn+ faceList.indexOf(name))% faceList.size();
+//		 
+//		 System.out.println(faceList.get(face_indx));
+		
+		
+/*READING USER INPUT*/
+		Scanner input = new Scanner(System.in);
+		while (input.hasNext()) {
+			String currLine = input.nextLine();
+			String splitted = currLine.split("\\s+"); 
+			System.out.println(currLine.length());
+			
+		}
+				
+		
+		 
+		
+
+	}
+
+}

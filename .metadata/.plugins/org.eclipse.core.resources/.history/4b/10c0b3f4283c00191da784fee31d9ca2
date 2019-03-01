@@ -1,0 +1,8 @@
+
+public class Detector {
+	
+	public detectOffGrid(int xCoord, int yCoord) {
+		
+	}
+
+}

@@ -1,0 +1,6 @@
+
+public interface Movement {
+	
+	public Pacman place(String xCoord, String yCoord, String faceDirection);
+	
+}
