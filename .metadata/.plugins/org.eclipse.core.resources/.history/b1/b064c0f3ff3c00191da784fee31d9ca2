@@ -16,10 +16,8 @@ public class Command implements Movement{
 	public static final String SOUTH_DIRECTION	=	"SOUTH";
 	public static final String WEST_DIRECTION	=	"WEST";
 	
-	// Number of step in each movement
 	public static final int MOVEMENT_STEP		= 	1;
 	
-	// Instantiate the gameDetector and faceList
 	Detector gameDetector = new Detector(Main.GRID_X_DIMENSION, Main.GRID_Y_DIMENSION, Main.DIRECTION_LIST);
 	List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
 	
@@ -31,15 +29,11 @@ public class Command implements Movement{
 		return thePacman;
 	}
 	
-	/**
-	 * This function takes the Pacman Object and move towards the face direction
-	 */
 	public Pacman move(Pacman thePacman) {
 		
 		// Movement to North Direction (Only yCoord Change)
 		if(thePacman.getFaceDirection().equals(NORTH_DIRECTION)){
 			int nextyGrid = thePacman.getyCoord() + MOVEMENT_STEP;
-			// Available movement 
 			if(!gameDetector.isOffGrid(thePacman.getxCoord(), nextyGrid)) {
 				thePacman.setyCoord(nextyGrid);
 			}
@@ -51,7 +45,6 @@ public class Command implements Movement{
 		// Movement to East Direction (Only xCoord Change)
 		else if(thePacman.getFaceDirection().equals(EAST_DIRECTION)){
 			int nextxGrid = thePacman.getxCoord() + MOVEMENT_STEP;
-			// Available movement 
 			if(!gameDetector.isOffGrid(nextxGrid, thePacman.getyCoord())) {
 				thePacman.setxCoord(nextxGrid);
 			}
@@ -63,7 +56,6 @@ public class Command implements Movement{
 		// Movement to South Direction (Only yCoord Change)
 		else if(thePacman.getFaceDirection().equals(SOUTH_DIRECTION)){
 			int nextyGrid = thePacman.getyCoord() - MOVEMENT_STEP;
-			// Available movement 
 			if(!gameDetector.isOffGrid(thePacman.getxCoord(), nextyGrid)) {
 				thePacman.setyCoord(nextyGrid);
 			}
@@ -75,7 +67,7 @@ public class Command implements Movement{
 		// Movement to West Direction (Only xCoord Change)
 		else if(thePacman.getFaceDirection().equals(WEST_DIRECTION)){
 			int nextxGrid = thePacman.getxCoord() - MOVEMENT_STEP;
-			// Available movement 
+			
 			if(!gameDetector.isOffGrid(nextxGrid, thePacman.getyCoord())) {
 				thePacman.setxCoord(nextxGrid);
 			}
@@ -87,9 +79,6 @@ public class Command implements Movement{
 		return thePacman;
 	}
 
-	/**
-	 * The function takes the Pacman object and update its state by turning its face direction to the left
-	 */
 	public Pacman turnLeft(Pacman thePacman) {
 		int currFaceIndx 	= faceList.indexOf(thePacman.getFaceDirection());
 		int leftAdjustment	= faceList.size() - MOVEMENT_STEP;
@@ -100,22 +89,16 @@ public class Command implements Movement{
 		return thePacman;
 	}
 
-	/**
-	 * The function takes the Pacman object and update its state by turning its face direction to the right
-	 */
 	public Pacman turnRight(Pacman thePacman) {
 		int currFaceIndx 	= faceList.indexOf(thePacman.getFaceDirection());
 		int rightAdjustment	= MOVEMENT_STEP;
 		int newFaceindx 		= ((rightAdjustment + currFaceIndx) % faceList.size());
+		
 		// Setting to the new face direction
 		thePacman.setFaceDirection(faceList.get(newFaceindx));
 		return thePacman;
 	}
 
-	/**
-	 * Function to return the current Pacman state such that x and y coordinate, along with its face direction
-	 * @param thePacman
-	 */
 	public void getReport(Pacman thePacman) {
 		System.out.printf("%d,%d,%s\n", thePacman.getxCoord(), 
 				thePacman.getyCoord(),
