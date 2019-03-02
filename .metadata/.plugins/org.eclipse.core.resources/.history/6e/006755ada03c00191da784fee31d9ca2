@@ -1,0 +1,31 @@
+
+public class Detector {
+	
+	// The threshold grid size which is set to be zero
+	public static final int THRESHOLD_SIZE = 0;
+	
+	int gridXDimension;
+	int gridYDimension;
+
+	public Detector(int gridXDimension, int gridYDimension) {
+		this.gridXDimension = gridXDimension;
+		this.gridYDimension = gridYDimension;
+	}
+
+	/**
+	 * Function to check whether the Pacman x and y coordinate is still inside the grid
+	 * to ensure that the Pacman is not placed off the grid and not moving outside the grid
+	 * @param xCoord
+	 * @param yCoord
+	 * @return
+	 */
+	public boolean isOffGrid(int xCoord, int yCoord) {
+		if ((THRESHOLD_SIZE <= xCoord) && (xCoord <= gridXDimension) &&
+				(THRESHOLD_SIZE <= yCoord) && (yCoord <= gridYDimension)) {
+			return false;
+			
+		}
+		// Default to return it as off grid
+		return true;
+	}
+}

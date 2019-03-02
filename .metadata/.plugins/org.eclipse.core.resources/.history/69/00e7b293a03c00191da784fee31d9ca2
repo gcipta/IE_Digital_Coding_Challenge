@@ -1,0 +1,25 @@
+
+public class Detector {
+	
+	// The threshold grid size which is set to be zero
+	public static final int THRESHOLD_SIZE = 0;
+	
+	int gridXDimension;
+	int gridYDimension;
+
+	public Detector(int gridXDimension, int gridYDimension) {
+		this.gridXDimension = gridXDimension;
+		this.gridYDimension = gridYDimension;
+	}
+
+	// If the input type is already in int
+	public boolean isOffGrid(int xCoord, int yCoord) {
+		if ((THRESHOLD_SIZE <= xCoord) && (xCoord <= gridXDimension) &&
+				(THRESHOLD_SIZE <= yCoord) && (yCoord <= gridYDimension)) {
+			return false;
+			
+		}
+		// Default to return it as off grid
+		return true;
+	}
+}

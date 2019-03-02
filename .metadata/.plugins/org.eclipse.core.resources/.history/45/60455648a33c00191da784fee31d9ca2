@@ -1,0 +1,133 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class GamePlay {
+	
+	int gridXDimension;
+	int gridYDimension;
+	
+	Pacman thePacman = null;
+	Detector gameDetector = new Detector(gridXDimension, gridYDimension);
+	Command gameCommand = new Command();
+	
+	// Indicator to determine if the Pacman state has been initialized
+	boolean gameStart = false;
+	
+	public GamePlay(int gridXDimension, int gridYDimension) {
+		this.gridXDimension = gridXDimension;
+		this.gridYDimension = gridYDimension;
+	}
+
+
+	@SuppressWarnings("resource")
+	public Pacman standardGamePlay(){
+		
+		Scanner input = new Scanner(System.in);
+		while (input.hasNext()) {
+			gameCycle(input.nextLine());
+		}
+		return thePacman;
+	}
+	
+	
+	public Pacman fileGamePlay(String fileName) {
+		
+		// Read the File
+		BufferedReader reader = null;
+		
+		try {
+			reader = new BufferedReader(new FileReader(fileName));
+           
+			String line = reader.readLine();
+			while (line != null) {
+				System.out.println(line);
+				gameCycle(line);
+				// Read the next line
+				line = reader.readLine();
+			}
+			reader.close();
+		} 
+		
+		// The input file cannot be found 
+		catch(FileNotFoundException e) {
+     		System.out.println("ERROR! File Not Found... Aborting Games");
+     		System.out.println("Make sure it has been placed in the project folder.");
+     	}
+		
+		// Other Errors will be displayed
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return thePacman;
+	}
+
+	
+	
+	private void gameCycle(String input) {
+		String[] currLine = input.split(" ");
+		
+		if(currLine[0].equals(gameCommand.PLACE_COMMAND) && currLine[1]!=null) {
+		
+				// Get the state argument
+				String[] placement = currLine[1].split(",");
+				int xCoord = Integer.parseInt(placement[0]);
+				int yCoord = Integer.parseInt(placement[1]);
+				String faceDirection = placement[2];
+				
+				// The input coordinate is in the grid
+				if(!gameDetector.isOffGrid(xCoord, yCoord)) {
+					thePacman = gameCommand.place(xCoord, yCoord, faceDirection);
+					gameStart = true;
+				}
+				
+				// The input coordinate is off the grid
+				else { 
+					// Case 1: Pacman already has its current position
+					if(gameStart) {
+						// Backtrack to the final position
+						System.out.println("New Placement is Off the Grid. Backtrack to last placement");
+						thePacman = gameCommand.place(thePacman.getxCoord(), thePacman.getyCoord(), thePacman.getFaceDirection()); 
+					}
+					
+					// Case 2: Pacman position has not been initialized
+					else {
+						// Print error message
+						System.out.println("ERROR! Off the Grid... Please Try Again");
+							gameStart = false;
+						}
+						
+					}
+		}
+		
+		// Move the pacman according to its face direction
+		if(currLine[0].equals(gameCommand.MOVE_COMMAND) && gameStart) {
+			thePacman = gameCommand.move(thePacman);
+		}
+		
+		// 
+		if(currLine[0].equals(gameCommand.LEFT_COMMAND) && gameStart) {
+			thePacman = gameCommand.turnLeft(thePacman);
+		}
+		
+		if(currLine[0].equals(gameCommand.RIGHT_COMMAND) && gameStart) {
+			thePacman = gameCommand.turnRight(thePacman);
+		}
+		
+		if(currLine[0].equals(gameCommand.REPORT_COMMAND) && gameStart) {
+			gameCommand.getReport(thePacman);
+		}
+		
+		else {
+			System.out.println("SORRY! Command is being ignored... Please Try Again");
+		}
+		
+	}
+	
+	
+	
+
+}

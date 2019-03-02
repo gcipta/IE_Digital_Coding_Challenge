@@ -1,0 +1,71 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+	
+	// Define the Grid dimension for X (Horizontal) and Y (Vertical)
+	public final static int GRID_X_DIMENSION = 4;
+	public final static int GRID_Y_DIMENSION = 4;
+	
+	@SuppressWarnings("resource")
+	public static void main (String args[]) throws IOException {
+		
+		// Welcome Note
+		System.out.println("***************************");
+		System.out.println("WELCOME TO PACMAN SIMULATOR");
+		System.out.println("***************************\n");
+		
+		// Instructions
+		System.out.println("====================================================================================================");
+		System.out.println("General Instructions");
+		System.out.println("====================================================================================================");
+		
+		// Command Instructions
+		System.out.println("PLACE xCoord,yCoord,direction\t-> Initialise Pacman state");
+		System.out.println("MOVE	\t\t\t-> Move Pacman one step in its face direction");
+		System.out.println("LEFT	\t\t\t-> Change the face direction to the left from its current state");
+		System.out.println("RIGHT \t\t\t\t-> Change the face direction to the right from its current state");
+		System.out.println("REPORT \t\t\t\t-> Return the pacman current status");
+		System.out.println("====================================================================================================");
+		
+		// Further note
+		System.out.println("- Invalid commands will be ignored");
+		System.out.println("- The grid count start from (0,0) at South West most corner");
+		System.out.println("- PLACE command need to be valid such that it complies to the grid dimension");
+		System.out.println("- Any commands before the first valid PLACE command will be ignored");
+		System.out.println("- MOVE command resulting in Pacman going off the grid will be ignored");
+		System.out.println("====================================================================================================\n");
+
+		// Game Mode Selection
+		System.out.println("Select Game Mode (Enter 1 or 2):");
+		System.out.println("1. Standard Input Type");
+		System.out.println("2. File Input Type");
+		
+		// Instantiate the Game Object
+		GamePlay myGame = new GamePlay(GRID_X_DIMENSION, GRID_Y_DIMENSION); 
+		
+		// Instantiate the scanner object and option indicator to get the user input 
+		Scanner scan = new Scanner(System.in);
+		int option = scan.nextInt();
+		
+		// Standard Input Type
+		if(option == 1) {
+			// Play the game in standardGamePlay mode
+			System.out.println("Let's Begin, Type in the Command");
+			myGame.standardGamePlay();
+		}
+		
+		// File Input Type
+		else if(option == 2) {
+			// Get the file name and play the game in fileGamePlay mode
+			System.out.println("Enter the File Name");
+			String fileName = scan.next();
+			myGame.fileGamePlay(fileName);
+		}
+		
+		// Unidentified Request, Returning ERROR Message
+		else {
+			System.out.println("ERROR! Please Try Again...");
+		}
+	}
+}

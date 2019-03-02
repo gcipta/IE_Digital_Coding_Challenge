@@ -1,0 +1,103 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class GamePlay {
+	
+	Pacman thePacman = null;
+	Detector gameDetector = new Detector();
+	Command gameCommand = new Command();
+	
+	boolean gameStart = false;
+	
+	@SuppressWarnings("resource")
+	public Pacman standardGamePlay(){
+		
+		Scanner input = new Scanner(System.in);
+		while (input.hasNext()) {
+			gameCycle(input.nextLine());
+		}
+		return thePacman;
+	}
+	
+	
+	
+	public Pacman fileGamePlay(String fileName) {
+		
+		// Read the File
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(fileName));
+			String line = reader.readLine();
+			while (line != null) {
+				System.out.println(line);
+				
+				gameCycle(line);
+				// read next line
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return thePacman;
+	}
+
+	
+	
+	private void gameCycle(String input) {
+		String[] currLine = input.split(" ");
+		
+		if(currLine[0].equals(gameCommand.PLACE_COMMAND)) {
+			
+			String[] placement = currLine[1].split(",");
+			
+			if(!gameDetector.isOffGrid(Integer.parseInt(placement[0]),
+					Integer.parseInt(placement[1]))) {
+				thePacman = gameCommand.place(Integer.parseInt(placement[0]), 
+						Integer.parseInt(placement[1]), 
+						placement[2]);
+				
+				gameStart = true;
+			}
+			
+			else { 
+				if(gameStart) {
+					System.out.println("New Placement is Off the Grid. Backtrack to last placement");
+					thePacman = gameCommand.place(thePacman.getxCoord(), thePacman.getyCoord(), thePacman.getFaceDirection()); 
+				}
+				
+				else {
+					System.out.println("ERROR! Off the Grid... Please Try Again");
+					gameStart = false;
+				}
+				
+			}
+			
+		}
+		
+		// Move the pacman according to its face direction
+		if(currLine[0].equals(gameCommand.MOVE_COMMAND) && gameStart) {
+			thePacman = gameCommand.move(thePacman);
+		}
+		
+		// 
+		if(currLine[0].equals(gameCommand.LEFT_COMMAND) && gameStart) {
+			thePacman = gameCommand.turnLeft(thePacman);
+		}
+		
+		if(currLine[0].equals(gameCommand.RIGHT_COMMAND) && gameStart) {
+			thePacman = gameCommand.turnRight(thePacman);
+		}
+		
+		if(currLine[0].equals(gameCommand.REPORT_COMMAND) && gameStart) {
+			gameCommand.getReport(thePacman);
+		}
+		
+	}
+	
+	
+	
+
+}

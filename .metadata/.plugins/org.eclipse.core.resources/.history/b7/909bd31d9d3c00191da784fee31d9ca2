@@ -1,0 +1,43 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+	
+	@SuppressWarnings("resource")
+	public static void main (String args[]) throws IOException {
+		
+		System.out.println("***************************");
+		System.out.println("WELCOME TO PACMAN SIMULATOR");
+		System.out.println("***************************");
+		System.out.println("Select Game Mode (Enter 1 or 2):");
+		System.out.println("1. Standard Input Type");
+		System.out.println("2. File Input Type");
+		
+		// Instantiate the Game Object
+		GamePlay myGame = new GamePlay(); 
+		
+		// Creating the scanner object and option indicator to get the user input 
+		Scanner scan = new Scanner(System.in);
+		int option = scan.nextInt();
+		
+		// Standard Input Type
+		if(option == 1) {
+			// Play the game in standardGamePlay mode
+			System.out.println("Let's Begin, Type in the Command");
+			myGame.standardGamePlay();
+		}
+		
+		// File Input Type
+		else if(option == 2) {
+			// Get the file name and play the game in fileGamePlay mode
+			System.out.println("Enter the File Name");
+			String fileName = scan.next();
+			myGame.fileGamePlay(fileName);
+		}
+		
+		// Unidentified Request, Returning ERROR Message
+		else {
+			System.out.println("ERROR! Please Try Again...");
+		}
+	}
+}

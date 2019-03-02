@@ -18,22 +18,14 @@ public class Command implements Movement{
 	
 	public static final int MOVEMENT_STEP		= 	1;
 	
-	Detector gameDetector = new Detector();
+	Detector gameDetector = new Detector(Main.GRID_X_DIMENSION, Main.GRID_Y_DIMENSION, Main.DIRECTION_LIST);
 	List<String> faceList = Arrays.asList("NORTH", "EAST", "SOUTH", "WEST");
 	
 	/**
 	 * This function is to initialize new Pacman based on the place command
 	 */
 	public Pacman place(int xCoord, int yCoord, String faceDirection) {
-		Pacman thePacman = null;
-		
-		if(!gameDetector.isOffGrid(xCoord, yCoord)) {
-			thePacman = new Pacman(xCoord, yCoord, faceDirection);
-		}
-		else {
-			System.out.println("ERROR! Out of Grid");
-		}
-		
+		Pacman thePacman = new Pacman(xCoord, yCoord, faceDirection);
 		return thePacman;
 	}
 	
@@ -118,6 +110,4 @@ public class Command implements Movement{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 }

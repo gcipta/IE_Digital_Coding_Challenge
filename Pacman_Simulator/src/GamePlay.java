@@ -1,16 +1,44 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GamePlay {
 	
+	public static final int PLACE_COMMAND_LENGTH = 2;
+	
+	// The x and y grid dimension
+	int gridXDimension;
+	int gridYDimension;
+	List<String> directionList;
+	
+	// Several object that is needed in the GamePlay class
 	Pacman thePacman = null;
-	Detector gameDetector = new Detector();
+	Detector gameDetector = new Detector(gridXDimension, gridYDimension, directionList);
 	Command gameCommand = new Command();
 	
+	// Indicator to determine if the Pacman state has been initialized
 	boolean gameStart = false;
 	
+	/**
+	 * Instantiate the GamePlay with the input x and y grid dimension
+	 * @param gridXDimension
+	 * @param gridYDimension
+	 * @param directionList 
+	 */
+	public GamePlay(int gridXDimension, int gridYDimension, List<String> directionList) {
+		this.gridXDimension = gridXDimension;
+		this.gridYDimension = gridYDimension;
+		this.directionList = directionList;
+	}
+
+
+	/**
+	 * Function to handle the standard game play by which user type in command from the console
+	 * @return
+	 */
 	@SuppressWarnings("resource")
 	public Pacman standardGamePlay(){
 		
@@ -21,44 +49,78 @@ public class GamePlay {
 		return thePacman;
 	}
 	
-	
-	
+	/**
+	 * Function to handle the file game play by which it reads the command held in the .txt file 
+	 * @return
+	 */
 	public Pacman fileGamePlay(String fileName) {
 		
 		// Read the File
-		BufferedReader reader;
+		BufferedReader reader = null;
+		
 		try {
 			reader = new BufferedReader(new FileReader(fileName));
+           
+			// Get the line
 			String line = reader.readLine();
 			while (line != null) {
 				System.out.println(line);
-				
 				gameCycle(line);
-				// read next line
+				// Read the next line
 				line = reader.readLine();
 			}
 			reader.close();
-		} catch (IOException e) {
+		} 
+		
+		// The input file cannot be found 
+		catch(FileNotFoundException e) {
+     		System.out.println("ERROR! File Not Found... Aborting Games");
+     		System.out.println("Make sure it has been placed in the project folder.");
+     	}
+		
+		// Other Errors will be displayed
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		return thePacman;
 	}
 
-	
-	
+	/**
+	 * This function is the main game routine, which process the given user input command
+	 * @param input
+	 */
 	private void gameCycle(String input) {
 		String[] currLine = input.split(" ");
 		
-		if(currLine[0].equals(gameCommand.PLACE_COMMAND)) {
+		if(currLine.length == PLACE_COMMAND_LENGTH && currLine[0].equals(gameCommand.PLACE_COMMAND)) {
 			
-			String[] placement = currLine[1].split(",");
-			
-			if(!gameDetector.isOffGrid(placement[0], placement[1])) {
-				thePacman = gameCommand.place(Integer.parseInt(placement[0]), 
-						Integer.parseInt(placement[1]), 
-						placement[2]);
-				
+			// Get the state argument
+			String[] state = currLine[1].split(",");
+			int xCoord = Integer.parseInt(state[0]);
+			int yCoord = Integer.parseInt(state[1]);
+			String faceDirection = state[2];
+		
+			// The input coordinate is in the grid
+			if(!gameDetector.isOffGrid(xCoord, yCoord) && gameDetector.isValidDirection(faceDirection)) {
+				thePacman = gameCommand.place(xCoord, yCoord, faceDirection);
 				gameStart = true;
+			}
+			
+			// The input coordinate is off the grid
+			else { 
+				// Case 1: Pacman already has its current position
+				if(gameStart) {
+					// Backtrack to the final position
+					System.out.println("New Placement is Off the Grid. Backtrack to last placement");
+					thePacman = gameCommand.place(thePacman.getxCoord(), thePacman.getyCoord(), thePacman.getFaceDirection()); 
+				}
+				
+				// Case 2: Pacman position has not been initialized
+				else {
+					// Print error message
+					System.out.println("ERROR... Please Try Again");
+					gameStart = false;
+				}
 			}
 		}
 		
@@ -67,22 +129,19 @@ public class GamePlay {
 			thePacman = gameCommand.move(thePacman);
 		}
 		
-		// 
+		// Change the Pacman face direction to its left
 		if(currLine[0].equals(gameCommand.LEFT_COMMAND) && gameStart) {
 			thePacman = gameCommand.turnLeft(thePacman);
 		}
 		
+		// Change the Pacman face direction to its right
 		if(currLine[0].equals(gameCommand.RIGHT_COMMAND) && gameStart) {
 			thePacman = gameCommand.turnRight(thePacman);
 		}
 		
+		// Give the report of the current Pacman state
 		if(currLine[0].equals(gameCommand.REPORT_COMMAND) && gameStart) {
 			gameCommand.getReport(thePacman);
 		}
-		
 	}
-	
-	
-	
-
 }
