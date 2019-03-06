@@ -10,13 +10,13 @@ public class GamePlay {
 	public static final int PLACE_COMMAND_LENGTH = 2;
 	
 	// The x and y grid dimension
-	private int gridXDimension;
-	private int gridYDimension;
-	private List<String> directionList;
+	int gridXDimension;
+	int gridYDimension;
+	List<String> directionList;
 	
 	// Several object that is needed in the GamePlay class
 	Pacman thePacman = null;
-	Detector gameDetector = new Detector(gridXDimension, gridYDimension, Main.DIRECTION_LIST);
+	Detector gameDetector = new Detector(gridXDimension, gridYDimension, directionList);
 	Command gameCommand = new Command();
 	
 	// Indicator to determine if the Pacman state has been initialized
