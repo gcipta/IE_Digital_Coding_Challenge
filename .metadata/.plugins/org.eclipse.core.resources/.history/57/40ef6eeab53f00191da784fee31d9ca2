@@ -45,7 +45,7 @@ public class Main {
 		System.out.println("2. File Input Type");
 		
 		// Instantiate the Game Object
-		GamePlay myGame = new GamePlay(); 
+		GamePlay myGame = new GamePlay(GRID_X_DIMENSION, GRID_Y_DIMENSION, DIRECTION_LIST); 
 		
 		// Instantiate the scanner object and option indicator to get the user input 
 		Scanner scan = new Scanner(System.in);

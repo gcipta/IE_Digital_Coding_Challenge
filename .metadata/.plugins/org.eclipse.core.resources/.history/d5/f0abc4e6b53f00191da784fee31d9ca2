@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GamePlay {
@@ -15,6 +16,19 @@ public class GamePlay {
 	
 	// Indicator to determine if the Pacman state has been initialized
 	boolean gameStart = false;
+	
+	/**
+	 * Instantiate the GamePlay with the input x and y grid dimension
+	 * @param gridXDimension
+	 * @param gridYDimension
+	 * @param directionList 
+	 */
+	public GamePlay(int gridXDimension, int gridYDimension, List<String> directionList) {
+		this.gridXDimension = gridXDimension;
+		this.gridYDimension = gridYDimension;
+		this.directionList = directionList;
+	}
+
 
 	/**
 	 * Function to handle the standard game play by which user type in command from the console
